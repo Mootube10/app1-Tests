@@ -2,116 +2,166 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FlexiApp Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>App Demo – Made For Your Brand</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background: #f5f5f5;
+      font-family: 'Inter', sans-serif;
+      background: #f0f2f5;
       color: #333;
     }
     header {
-      background: #3f51b5;
+      background: linear-gradient(to right, #4e54c8, #8f94fb);
+      padding: 25px 20px;
       color: white;
-      padding: 20px;
       text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+    header p {
+      margin: 5px 0 0;
+      font-weight: 300;
     }
     nav {
       display: flex;
       justify-content: center;
-      background: #303f9f;
+      gap: 10px;
+      background: white;
+      padding: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 999;
     }
     nav button {
-      padding: 10px 20px;
+      background: #eee;
       border: none;
-      background: transparent;
-      color: white;
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-weight: 600;
       cursor: pointer;
-      font-weight: bold;
+      transition: 0.2s;
     }
-    nav button:hover {
-      background: #1a237e;
+    nav button.active {
+      background: #4e54c8;
+      color: white;
     }
-    section {
-      padding: 20px;
-      display: none;
-    }
-    section.active {
-      display: block;
+    .container {
+      max-width: 900px;
+      margin: 20px auto;
+      padding: 0 20px;
     }
     .card {
       background: white;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 16px;
+      margin-bottom: 16px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
+      transition: transform 0.2s;
     }
-    input, textarea {
-      width: 100%;
-      margin: 10px 0;
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
+    .card:hover {
+      transform: translateY(-3px);
     }
-    button.submit {
-      background: #3f51b5;
-      color: white;
-      border: none;
-      padding: 10px;
-      width: 100%;
-      border-radius: 6px;
+    .card h3 {
+      margin-top: 0;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #eee;
+      font-size: 14px;
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>FlexiApp Demo</h1>
-    <p>Showcase your future app here</p>
+    <h1>📱 FlexiApp Pro Demo</h1>
+    <p>This app could be YOUR company’s next official app</p>
   </header>
 
   <nav>
-    <button onclick="showSection('home')">Home</button>
-    <button onclick="showSection('services')">Products</button>
-    <button onclick="showSection('contact')">Contact</button>
-    <button onclick="showSection('login')">Login</button>
+    <button onclick="showTab('retail')" class="active">Retail</button>
+    <button onclick="showTab('fashion')">Fashion</button>
+    <button onclick="showTab('travel')">Travel</button>
+    <button onclick="showTab('events')">Events</button>
   </nav>
 
-  <section id="home" class="active">
-    <h2>Welcome to FlexiApp</h2>
-    <p>This is a prototype app you can customize for any business — retail, fashion, food, airline, hotel and more.</p>
-    <div class="card">
-      <strong>Try editing this app with your own brand and listings.</strong>
+  <div class="container">
+    <!-- Retail Tab -->
+    <div id="retail" class="tab active">
+      <div class="card">
+        <h3>🛒 Tesco Mobile Deals</h3>
+        <p>Shop exclusive bundles with Clubcard prices. Weekly updated offers just for you.</p>
+      </div>
+      <div class="card">
+        <h3>📦 Amazon Express</h3>
+        <p>Get next-day delivery with our ultra-fast app integration. Tap. Buy. Done.</p>
+      </div>
     </div>
-  </section>
 
-  <section id="services">
-    <h2>Product / Service Listings</h2>
-    <div class="card">🛍️ Product 1 - Example Item</div>
-    <div class="card">👕 Product 2 - Example Clothing</div>
-    <div class="card">✈️ Product 3 - Travel Deal</div>
-  </section>
+    <!-- Fashion Tab -->
+    <div id="fashion" class="tab" style="display: none;">
+      <div class="card">
+        <h3>👟 Nike Style Scan</h3>
+        <p>Try shoes virtually, check real-time stock, and get AI-powered size fits.</p>
+      </div>
+      <div class="card">
+        <h3>👜 Boohoo Closet</h3>
+        <p>Swipe to style! Get outfit suggestions based on weather & mood.</p>
+      </div>
+    </div>
 
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <input type="text" placeholder="Your Name" />
-    <input type="email" placeholder="Your Email" />
-    <textarea placeholder="Your Message"></textarea>
-    <button class="submit">Send (Demo)</button>
-  </section>
+    <!-- Travel Tab -->
+    <div id="travel" class="tab" style="display: none;">
+      <div class="card">
+        <h3>✈️ British Airways Trips</h3>
+        <p>Book, check-in, and track flights in real-time with full travel wallet features.</p>
+      </div>
+      <div class="card">
+        <h3>🚗 Uber Quick</h3>
+        <p>Live map tracking, fare estimates, and smart route planning in one app.</p>
+      </div>
+    </div>
 
-  <section id="login">
-    <h2>Login (Demo)</h2>
-    <input type="email" placeholder="Email" />
-    <input type="password" placeholder="Password" />
-    <button class="submit">Login</button>
-  </section>
+    <!-- Events Tab -->
+    <div id="events" class="tab" style="display: none;">
+      <div class="card">
+        <h3>🎤 LiveNation App</h3>
+        <p>See upcoming events, buy tickets, and scan your app at the door.</p>
+      </div>
+      <div class="card">
+        <h3>🎮 GameFest Portal</h3>
+        <p>Join upcoming expos, RSVP with QR tickets, and chat with brands live.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3>🚀 Ready to Turn This Into Your App?</h3>
+      <p>I’m an app developer currently looking to work with ambitious brands. Let’s build your official app — with real features, custom UI, and full functionality.</p>
+      <p><strong>Email:</strong> yourname@email.com</p>
+      <p><strong>GitHub Demo:</strong> github.com/yourdemo</p>
+    </div>
+  </div>
+
+  <footer>
+    Built by a new developer — modern, powerful, and scalable.
+  </footer>
 
   <script>
-    function showSection(id) {
-      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+    function showTab(tabId) {
+      document.querySelectorAll('.tab').forEach(tab => tab.style.display = 'none');
+      document.getElementById(tabId).style.display = 'block';
+
+      document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
     }
   </script>
 </body>
