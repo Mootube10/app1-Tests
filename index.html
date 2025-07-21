@@ -1,110 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>StyleMate - Virtual Wardrobe</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FlexiApp Demo</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f6f4f2;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #f5f5f5;
       color: #333;
-      padding: 20px;
     }
-    h1 {
+    header {
+      background: #3f51b5;
+      color: white;
+      padding: 20px;
       text-align: center;
-      color: #6d4c41;
     }
-    .container {
-      max-width: 700px;
-      margin: auto;
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    nav {
+      display: flex;
+      justify-content: center;
+      background: #303f9f;
     }
-    input, select, button {
-      padding: 10px;
-      margin: 10px 5px;
-      font-size: 16px;
-    }
-    .wardrobe-item {
-      padding: 8px;
-      margin: 5px;
-      background: #eceff1;
-      border-radius: 8px;
-    }
-    .outfit {
+    nav button {
+      padding: 10px 20px;
+      border: none;
+      background: transparent;
+      color: white;
+      cursor: pointer;
       font-weight: bold;
-      margin-top: 20px;
-      background: #e8f5e9;
+    }
+    nav button:hover {
+      background: #1a237e;
+    }
+    section {
+      padding: 20px;
+      display: none;
+    }
+    section.active {
+      display: block;
+    }
+    .card {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      width: 100%;
+      margin: 10px 0;
       padding: 10px;
-      border-left: 4px solid #66bb6a;
-      border-radius: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button.submit {
+      background: #3f51b5;
+      color: white;
+      border: none;
+      padding: 10px;
+      width: 100%;
+      border-radius: 6px;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>👗 StyleMate</h1>
 
-    <h2>Add Clothing Item</h2>
-    <input type="text" id="itemName" placeholder="e.g. Red T-Shirt">
-    <select id="itemCategory">
-      <option value="Top">Top</option>
-      <option value="Bottom">Bottom</option>
-      <option value="Shoes">Shoes</option>
-      <option value="Accessory">Accessory</option>
-    </select>
-    <input type="color" id="itemColor" value="#ff0000">
-    <button onclick="addClothing()">Add</button>
+  <header>
+    <h1>FlexiApp Demo</h1>
+    <p>Showcase your future app here</p>
+  </header>
 
-    <h2>Your Wardrobe</h2>
-    <div id="wardrobeList"></div>
+  <nav>
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('services')">Products</button>
+    <button onclick="showSection('contact')">Contact</button>
+    <button onclick="showSection('login')">Login</button>
+  </nav>
 
-    <h2>Outfit Suggestion</h2>
-    <button onclick="suggestOutfit()">🎯 Suggest Outfit</button>
-    <div id="outfitSuggestion" class="outfit"></div>
-  </div>
+  <section id="home" class="active">
+    <h2>Welcome to FlexiApp</h2>
+    <p>This is a prototype app you can customize for any business — retail, fashion, food, airline, hotel and more.</p>
+    <div class="card">
+      <strong>Try editing this app with your own brand and listings.</strong>
+    </div>
+  </section>
+
+  <section id="services">
+    <h2>Product / Service Listings</h2>
+    <div class="card">🛍️ Product 1 - Example Item</div>
+    <div class="card">👕 Product 2 - Example Clothing</div>
+    <div class="card">✈️ Product 3 - Travel Deal</div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <input type="text" placeholder="Your Name" />
+    <input type="email" placeholder="Your Email" />
+    <textarea placeholder="Your Message"></textarea>
+    <button class="submit">Send (Demo)</button>
+  </section>
+
+  <section id="login">
+    <h2>Login (Demo)</h2>
+    <input type="email" placeholder="Email" />
+    <input type="password" placeholder="Password" />
+    <button class="submit">Login</button>
+  </section>
 
   <script>
-    const wardrobe = [];
-
-    function addClothing() {
-      const name = document.getElementById('itemName').value;
-      const category = document.getElementById('itemCategory').value;
-      const color = document.getElementById('itemColor').value;
-
-      if (!name) return alert('Please enter a name.');
-
-      wardrobe.push({ name, category, color });
-      renderWardrobe();
-      document.getElementById('itemName').value = '';
-    }
-
-    function renderWardrobe() {
-      const wardrobeList = document.getElementById('wardrobeList');
-      wardrobeList.innerHTML = '';
-      wardrobe.forEach(item => {
-        const div = document.createElement('div');
-        div.className = 'wardrobe-item';
-        div.innerHTML = `<span style="color:${item.color}; font-weight:bold;">●</span> [${item.category}] ${item.name}`;
-        wardrobeList.appendChild(div);
-      });
-    }
-
-    function suggestOutfit() {
-      const top = wardrobe.find(item => item.category === 'Top');
-      const bottom = wardrobe.find(item => item.category === 'Bottom');
-      const shoes = wardrobe.find(item => item.category === 'Shoes');
-      let outfit = [];
-
-      if (top) outfit.push(`Top: ${top.name}`);
-      if (bottom) outfit.push(`Bottom: ${bottom.name}`);
-      if (shoes) outfit.push(`Shoes: ${shoes.name}`);
-      if (outfit.length === 0) outfit.push("You don't have enough clothes!");
-
-      document.getElementById('outfitSuggestion').innerText = outfit.join('\n');
+    function showSection(id) {
+      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
   </script>
 </body>
